@@ -60,7 +60,14 @@
     <Compile Include="category.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="CategoryRepository.cs" />
     <Compile Include="country.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="customer_app.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="customer_app_countries.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database.Context.cs">

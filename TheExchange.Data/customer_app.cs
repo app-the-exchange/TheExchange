@@ -12,24 +12,18 @@ namespace TheExchange.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class country
+    public partial class customer_app
     {
-        public country()
+        public customer_app()
         {
-            this.category = new HashSet<category>();
             this.customer_app_countries = new HashSet<customer_app_countries>();
         }
     
-        public int idcountry { get; set; }
+        public int idcustomer_app { get; set; }
         public string name { get; set; }
-        public Nullable<int> idregion { get; set; }
-        public string short_description { get; set; }
-        public string description { get; set; }
-        public string flag_image { get; set; }
-        public string banner_image { get; set; }
+        public string email { get; set; }
+        public string code { get; set; }
     
-        public virtual region region { get; set; }
-        public virtual ICollection<category> category { get; set; }
         public virtual ICollection<customer_app_countries> customer_app_countries { get; set; }
     }
 }

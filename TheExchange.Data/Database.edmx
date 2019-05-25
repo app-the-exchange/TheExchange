@@ -27,6 +27,23 @@
           <Property Name="flag_image" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="banner_image" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="customer_app">
+          <Key>
+            <PropertyRef Name="idcustomer_app" />
+          </Key>
+          <Property Name="idcustomer_app" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="code" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="customer_app_countries">
+          <Key>
+            <PropertyRef Name="idcustomer_app_countries" />
+          </Key>
+          <Property Name="idcustomer_app_countries" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcustomer_app" Type="int" Nullable="false" />
+          <Property Name="idcountry" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="region">
           <Key>
             <PropertyRef Name="idregion" />
@@ -58,9 +75,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="customer_app_countries_ibfk_1">
+          <End Role="customer_app" Type="Self.customer_app" Multiplicity="1" />
+          <End Role="customer_app_countries" Type="Self.customer_app_countries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_app">
+              <PropertyRef Name="idcustomer_app" />
+            </Principal>
+            <Dependent Role="customer_app_countries">
+              <PropertyRef Name="idcustomer_app" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customer_app_countries_ibfk_2">
+          <End Role="country" Type="Self.country" Multiplicity="1" />
+          <End Role="customer_app_countries" Type="Self.customer_app_countries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="idcountry" />
+            </Principal>
+            <Dependent Role="customer_app_countries">
+              <PropertyRef Name="idcountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="the_exchangeModelStoreContainer">
           <EntitySet Name="category" EntityType="Self.category" Schema="the_exchange" store:Type="Tables" />
           <EntitySet Name="country" EntityType="Self.country" Schema="the_exchange" store:Type="Tables" />
+          <EntitySet Name="customer_app" EntityType="Self.customer_app" Schema="the_exchange" store:Type="Tables" />
+          <EntitySet Name="customer_app_countries" EntityType="Self.customer_app_countries" Schema="the_exchange" store:Type="Tables" />
           <EntitySet Name="region" EntityType="Self.region" Schema="the_exchange" store:Type="Tables" />
           <AssociationSet Name="category_ibfk_1" Association="Self.category_ibfk_1">
             <End Role="country" EntitySet="country" />
@@ -69,6 +112,14 @@
           <AssociationSet Name="country_ibfk_1" Association="Self.country_ibfk_1">
             <End Role="region" EntitySet="region" />
             <End Role="country" EntitySet="country" />
+          </AssociationSet>
+          <AssociationSet Name="customer_app_countries_ibfk_1" Association="Self.customer_app_countries_ibfk_1">
+            <End Role="customer_app" EntitySet="customer_app" />
+            <End Role="customer_app_countries" EntitySet="customer_app_countries" />
+          </AssociationSet>
+          <AssociationSet Name="customer_app_countries_ibfk_2" Association="Self.customer_app_countries_ibfk_2">
+            <End Role="country" EntitySet="country" />
+            <End Role="customer_app_countries" EntitySet="customer_app_countries" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -95,6 +146,16 @@
             <End Role="country" EntitySet="country" />
             <End Role="category" EntitySet="category" />
           </AssociationSet>
+          <EntitySet Name="customer_app" EntityType="the_exchangeModel.customer_app" />
+          <EntitySet Name="customer_app_countries" EntityType="the_exchangeModel.customer_app_countries" />
+          <AssociationSet Name="customer_app_countries_ibfk_2" Association="the_exchangeModel.customer_app_countries_ibfk_2">
+            <End Role="country" EntitySet="country" />
+            <End Role="customer_app_countries" EntitySet="customer_app_countries" />
+          </AssociationSet>
+          <AssociationSet Name="customer_app_countries_ibfk_1" Association="the_exchangeModel.customer_app_countries_ibfk_1">
+            <End Role="customer_app" EntitySet="customer_app" />
+            <End Role="customer_app_countries" EntitySet="customer_app_countries" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="country">
           <Key>
@@ -109,6 +170,7 @@
           <Property Name="banner_image" Type="String" Nullable="false" />
           <NavigationProperty Name="region" Relationship="the_exchangeModel.country_ibfk_1" FromRole="country" ToRole="region" />
           <NavigationProperty Name="category" Relationship="the_exchangeModel.category_ibfk_1" FromRole="country" ToRole="category" />
+          <NavigationProperty Name="customer_app_countries" Relationship="the_exchangeModel.customer_app_countries_ibfk_2" FromRole="country" ToRole="customer_app_countries" />
         </EntityType>
         <Association Name="country_ibfk_1">
           <End Type="the_exchangeModel.region" Role="region" Multiplicity="0..1" />
@@ -142,6 +204,50 @@
             </Principal>
             <Dependent Role="category">
               <PropertyRef Name="idcountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="customer_app">
+          <Key>
+            <PropertyRef Name="idcustomer_app" />
+          </Key>
+          <Property Name="idcustomer_app" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" />
+          <Property Name="email" Type="String" />
+          <Property Name="code" Type="String" />
+          <NavigationProperty Name="customer_app_countries" Relationship="the_exchangeModel.customer_app_countries_ibfk_1" FromRole="customer_app" ToRole="customer_app_countries" />
+        </EntityType>
+        <EntityType Name="customer_app_countries">
+          <Key>
+            <PropertyRef Name="idcustomer_app_countries" />
+          </Key>
+          <Property Name="idcustomer_app_countries" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcustomer_app" Type="Int32" Nullable="false" />
+          <Property Name="idcountry" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="country" Relationship="the_exchangeModel.customer_app_countries_ibfk_2" FromRole="customer_app_countries" ToRole="country" />
+          <NavigationProperty Name="customer_app" Relationship="the_exchangeModel.customer_app_countries_ibfk_1" FromRole="customer_app_countries" ToRole="customer_app" />
+        </EntityType>
+        <Association Name="customer_app_countries_ibfk_2">
+          <End Type="the_exchangeModel.country" Role="country" Multiplicity="1" />
+          <End Type="the_exchangeModel.customer_app_countries" Role="customer_app_countries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="idcountry" />
+            </Principal>
+            <Dependent Role="customer_app_countries">
+              <PropertyRef Name="idcountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customer_app_countries_ibfk_1">
+          <End Type="the_exchangeModel.customer_app" Role="customer_app" Multiplicity="1" />
+          <End Type="the_exchangeModel.customer_app_countries" Role="customer_app_countries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_app">
+              <PropertyRef Name="idcustomer_app" />
+            </Principal>
+            <Dependent Role="customer_app_countries">
+              <PropertyRef Name="idcustomer_app" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -180,6 +286,25 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_app">
+            <EntityTypeMapping TypeName="the_exchangeModel.customer_app">
+              <MappingFragment StoreEntitySet="customer_app">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idcustomer_app" ColumnName="idcustomer_app" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_app_countries">
+            <EntityTypeMapping TypeName="the_exchangeModel.customer_app_countries">
+              <MappingFragment StoreEntitySet="customer_app_countries">
+                <ScalarProperty Name="idcountry" ColumnName="idcountry" />
+                <ScalarProperty Name="idcustomer_app" ColumnName="idcustomer_app" />
+                <ScalarProperty Name="idcustomer_app_countries" ColumnName="idcustomer_app_countries" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

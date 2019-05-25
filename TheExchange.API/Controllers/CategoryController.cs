@@ -6,17 +6,17 @@ using TheExchange.Services;
 
 namespace TheExchange.API.Controllers
 {
-    public class CountryController : ApiController
+    public class CategoryController : ApiController
     {
-        private readonly CountryService _service;
+        private readonly CategoryService _service;
 
-        public CountryController()
+        public CategoryController()
         {
             var uow = new UnitOfWork();
-            _service = new CountryService(uow);
+            _service = new CategoryService(uow);
         }
 
-        public List<Country> Get()
+        public List<Category> Get()
         {
             var response = _service.GetAll();
 
