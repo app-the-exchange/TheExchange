@@ -11,6 +11,6 @@ namespace TheExchange.Entities
         public string code { get; set; }
 
         [JsonIgnore]
-        public virtual List<CustomerCountrie> customer_app_countries { get; set; }
+        public virtual List<CustomerAppCountrie> customer_app_countries { get; set; }
     }
 }

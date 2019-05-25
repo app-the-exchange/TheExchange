@@ -13,11 +13,22 @@ namespace TheExchange.Services
             _uow = uow;
         }
 
-        public void PostCustomerApp(CustomerApp entity)
+        public int PostCustomerApp(CustomerApp entity)
         {
             customer_app _entity = Mapper.Map<customer_app>(entity);
 
             _uow.CustomerRepository.Add(_entity);
+
+            return _entity.idcustomer_app;
+        }
+
+        public int PostCustomerAppCountry(CustomerAppCountrie entity)
+        {
+            customer_app_countries _entity = Mapper.Map<customer_app_countries>(entity);
+
+            _uow.CustomeCountryRepository.Add(_entity);
+
+            return _entity.idcustomer_app;
         }
 
     }

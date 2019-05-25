@@ -16,9 +16,16 @@ namespace TheExchange.API.Controllers
         }
 
         [Route("CustomerApp")]
-        public void Post([FromBody]CustomerApp entity)
+        public int Post([FromBody]CustomerApp entity)
         {
-            _service.PostCustomerApp(entity);
+            return _service.PostCustomerApp(entity);
+        }
+
+        [HttpPost]
+        [Route("CustomerApp/Country")]
+        public void PostCountry([FromBody]CustomerAppCountrie entity)
+        {
+            _service.PostCustomerAppCountry(entity);
         }
 
     }
