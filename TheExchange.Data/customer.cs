@@ -24,10 +24,10 @@ namespace TheExchange.Data
         public string email { get; set; }
         public System.DateTime startdate { get; set; }
         public string course { get; set; }
-        public string posititon { get; set; }
         public Nullable<int> idcountry { get; set; }
         public Nullable<int> idcustomer_app { get; set; }
         public string code { get; set; }
+        public string position { get; set; }
     
         public virtual ICollection<category_customer> category_customer { get; set; }
         public virtual country country { get; set; }

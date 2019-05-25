@@ -1,10 +1,13 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Results;
 using TheExchange.Data;
 using TheExchange.Entities;
 using TheExchange.Services;
+using TheExchange.API.Helpers;
 
 namespace TheExchange.API.Controllers
 {
+    [RoutePrefix("api/CustomerApp")]
     public class CustomerAppController : ApiController
     {
         private readonly CustomerAppService _service;
@@ -23,9 +26,24 @@ namespace TheExchange.API.Controllers
 
         [HttpPost]
         [Route("CustomerApp/Country")]
-        public void PostCountry([FromBody]CustomerAppCountrie entity)
+        public bool PostCountry([FromBody]CustomerAppCountrie entity)
         {
             _service.PostCustomerAppCountry(entity);
+            return true;
+        }
+
+        [HttpPost]
+        [Route("AddCode")]
+        public bool AddCode([FromBody]CustomerApp entity)
+        {
+            if (string.IsNullOrEmpty(entity.code))
+            {
+                return false;
+            }
+
+            entity.code = System.Text.Encoding.UTF8.DecodeBase64(entity.code);
+
+            return _service.AddCode(entity);
         }
 
     }

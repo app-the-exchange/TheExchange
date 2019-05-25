@@ -18,7 +18,7 @@ namespace TheExchange.Entities
 
         public string course { get; set; }
 
-        public string posititon { get; set; }
+        public string position { get; set; }
 
         public int? idcountry { get; set; }
 

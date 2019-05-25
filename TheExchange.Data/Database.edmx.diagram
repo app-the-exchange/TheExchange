@@ -15,12 +15,12 @@
         <AssociationConnector Association="the_exchangeModel.customer_app_countries_ibfk_2" />
         <AssociationConnector Association="the_exchangeModel.customer_app_countries_ibfk_1" />
         <EntityTypeShape EntityType="the_exchangeModel.category_customer" Width="1.5" PointX="10.5" PointY="4.375" />
-        <EntityTypeShape EntityType="the_exchangeModel.customer" Width="1.5" PointX="8.25" PointY="3.125" />
         <AssociationConnector Association="the_exchangeModel.category_customer_ibfk_1" />
+        <EntityTypeShape EntityType="the_exchangeModel.customer" Width="1.5" PointX="8.25" PointY="3.125" />
         <AssociationConnector Association="the_exchangeModel.category_customer_ibfk_2" />
         <AssociationConnector Association="the_exchangeModel.customer_ibfk_1" />
         <AssociationConnector Association="the_exchangeModel.customer_ibfk_2" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

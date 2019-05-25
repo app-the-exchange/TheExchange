@@ -47,10 +47,10 @@
           <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="startdate" Type="datetime" Nullable="false" />
           <Property Name="course" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="posititon" Type="varchar" MaxLength="255" />
           <Property Name="idcountry" Type="int" />
           <Property Name="idcustomer_app" Type="int" />
           <Property Name="code" Type="varchar" MaxLength="255" />
+          <Property Name="position" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="customer_app">
           <Key>
@@ -248,11 +248,11 @@
             <End Role="customer_app_countries" EntitySet="customer_app_countries" />
           </AssociationSet>
           <EntitySet Name="category_customer" EntityType="the_exchangeModel.category_customer" />
-          <EntitySet Name="customer" EntityType="the_exchangeModel.customer" />
           <AssociationSet Name="category_customer_ibfk_1" Association="the_exchangeModel.category_customer_ibfk_1">
             <End Role="country" EntitySet="country" />
             <End Role="category_customer" EntitySet="category_customer" />
           </AssociationSet>
+          <EntitySet Name="customer" EntityType="the_exchangeModel.customer" />
           <AssociationSet Name="category_customer_ibfk_2" Association="the_exchangeModel.category_customer_ibfk_2">
             <End Role="customer" EntitySet="customer" />
             <End Role="category_customer" EntitySet="category_customer" />
@@ -265,7 +265,7 @@
             <End Role="customer_app" EntitySet="customer_app" />
             <End Role="customer" EntitySet="customer" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="country">
           <Key>
             <PropertyRef Name="idcountry" />
@@ -376,23 +376,6 @@
           <NavigationProperty Name="country" Relationship="the_exchangeModel.category_customer_ibfk_1" FromRole="category_customer" ToRole="country" />
           <NavigationProperty Name="customer" Relationship="the_exchangeModel.category_customer_ibfk_2" FromRole="category_customer" ToRole="customer" />
         </EntityType>
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="idcustomer" />
-          </Key>
-          <Property Name="idcustomer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" />
-          <Property Name="email" Type="String" Nullable="false" />
-          <Property Name="startdate" Type="DateTime" Nullable="false" />
-          <Property Name="course" Type="String" Nullable="false" />
-          <Property Name="posititon" Type="String" />
-          <Property Name="idcountry" Type="Int32" />
-          <Property Name="idcustomer_app" Type="Int32" />
-          <Property Name="code" Type="String" />
-          <NavigationProperty Name="category_customer" Relationship="the_exchangeModel.category_customer_ibfk_2" FromRole="customer" ToRole="category_customer" />
-          <NavigationProperty Name="country" Relationship="the_exchangeModel.customer_ibfk_1" FromRole="customer" ToRole="country" />
-          <NavigationProperty Name="customer_app" Relationship="the_exchangeModel.customer_ibfk_2" FromRole="customer" ToRole="customer_app" />
-        </EntityType>
         <Association Name="category_customer_ibfk_1">
           <End Type="the_exchangeModel.country" Role="country" Multiplicity="1" />
           <End Type="the_exchangeModel.category_customer" Role="category_customer" Multiplicity="*" />
@@ -405,6 +388,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idcustomer" />
+          </Key>
+          <Property Name="idcustomer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="startdate" Type="DateTime" Nullable="false" />
+          <Property Name="course" Type="String" Nullable="false" />
+          <Property Name="idcountry" Type="Int32" />
+          <Property Name="idcustomer_app" Type="Int32" />
+          <Property Name="code" Type="String" />
+          <Property Name="position" Type="String" />
+          <NavigationProperty Name="category_customer" Relationship="the_exchangeModel.category_customer_ibfk_2" FromRole="customer" ToRole="category_customer" />
+          <NavigationProperty Name="country" Relationship="the_exchangeModel.customer_ibfk_1" FromRole="customer" ToRole="country" />
+          <NavigationProperty Name="customer_app" Relationship="the_exchangeModel.customer_ibfk_2" FromRole="customer" ToRole="customer_app" />
+        </EntityType>
         <Association Name="category_customer_ibfk_2">
           <End Type="the_exchangeModel.customer" Role="customer" Multiplicity="1" />
           <End Type="the_exchangeModel.category_customer" Role="category_customer" Multiplicity="*" />
@@ -441,7 +441,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -513,10 +513,10 @@
           <EntitySetMapping Name="customer">
             <EntityTypeMapping TypeName="the_exchangeModel.customer">
               <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="position" ColumnName="position" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="idcustomer_app" ColumnName="idcustomer_app" />
                 <ScalarProperty Name="idcountry" ColumnName="idcountry" />
-                <ScalarProperty Name="posititon" ColumnName="posititon" />
                 <ScalarProperty Name="course" ColumnName="course" />
                 <ScalarProperty Name="startdate" ColumnName="startdate" />
                 <ScalarProperty Name="email" ColumnName="email" />
