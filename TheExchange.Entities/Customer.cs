@@ -25,5 +25,7 @@ namespace TheExchange.Entities
         public int? idcustomer_app { get; set; }
 
         public string code { get; set; }
+
+        public Country country { get; set; }
     }
 }

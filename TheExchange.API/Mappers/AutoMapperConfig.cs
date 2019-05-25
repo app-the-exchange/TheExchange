@@ -19,7 +19,10 @@ namespace TheExchange.API.Mappers
 
                 cfg.CreateMap<category_customer, CategoryCustomer>();
 
-                cfg.CreateMap<customer, Customer>();
+                cfg.CreateMap<customer, Customer>().ForMember(
+                    dest => dest.country,
+                    opt => opt.MapFrom(src => src.country)
+                );
             });
         }
     }
