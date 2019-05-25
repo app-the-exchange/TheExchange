@@ -13,7 +13,7 @@ namespace TheExchange.Data.Repository
 
         public override IEnumerable<country> GetAll()
         {
-            return Entities.country.Include(c => c.category).ToList();
+            return Entities.country.ToList();
         }
     }
 }

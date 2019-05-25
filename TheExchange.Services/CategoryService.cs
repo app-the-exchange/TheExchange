@@ -15,9 +15,9 @@ namespace TheExchange.Services
             _uow = uow;
         }
 
-        public List<Category> GetAll()
+        public List<Category> Get(int idcountry)
         {
-            var _list = _uow.CategoryRepository.GetAll();
+            var _list = _uow.CategoryRepository.Get(idcountry);
 
             return Mapper.Map<List<Category>>(_list.ToList());
         }
