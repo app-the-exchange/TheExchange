@@ -16,9 +16,9 @@ namespace TheExchange.API.Controllers
             _service = new CategoryService(uow);
         }
 
-        public List<Category> Get()
+        public List<Category> Get(int id)
         {
-            var response = _service.GetAll();
+            var response = _service.Get(id);
 
             return response;
         }

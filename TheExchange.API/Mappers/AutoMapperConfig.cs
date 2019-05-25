@@ -11,7 +11,10 @@ namespace TheExchange.API.Mappers
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<region, Region>();
-                cfg.CreateMap<country, Country>();
+                cfg.CreateMap<country, Country>().ForMember(
+                    dest => dest.category,
+                    opt => opt.MapFrom(src => src.category)
+                );
             });
         }
     }

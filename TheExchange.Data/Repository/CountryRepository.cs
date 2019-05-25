@@ -1,4 +1,7 @@
-﻿using TheExchange.Data.Repository.Base;
+﻿using System.Collections.Generic;
+using TheExchange.Data.Repository.Base;
+using System.Data.Entity;
+using System.Linq;
 
 namespace TheExchange.Data.Repository
 {
@@ -6,6 +9,11 @@ namespace TheExchange.Data.Repository
     {
         public CountryRepository(Entities entities) : base(entities)
         {
+        }
+
+        public override IEnumerable<country> GetAll()
+        {
+            return Entities.country.ToList();
         }
     }
 }

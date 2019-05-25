@@ -60,7 +60,7 @@
     <Compile Include="category.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="country.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
