@@ -17,48 +17,74 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
+import { CountryComponent } from './pages/country/country.component';
+
+import * as mat from '@angular/material';
 
 const appRoutes: Routes = [
-    {
-        path      : '**',
-        redirectTo: 'sample'
-    }
+	{
+		path: 'country',
+		component: CountryComponent
+	},
+	{
+		path: '**',
+		redirectTo: 'sample'
+	}
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports     : [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
+	declarations: [
+		AppComponent,
+		CountryComponent
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		RouterModule.forRoot(appRoutes),
 
-        TranslateModule.forRoot(),
+		TranslateModule.forRoot(),
 
-        // Material moment date module
-        MatMomentDateModule,
+		// Material moment date module
+		MatMomentDateModule,
 
-        // Material
-        MatButtonModule,
-        MatIconModule,
+		// Material
+		MatButtonModule,
+		MatIconModule,
 
-        // Fuse modules
-        FuseModule.forRoot(fuseConfig),
-        FuseProgressBarModule,
-        FuseSharedModule,
-        FuseSidebarModule,
-        FuseThemeOptionsModule,
+		// Fuse modules
+		FuseModule.forRoot(fuseConfig),
+		FuseProgressBarModule,
+		FuseSharedModule,
+		FuseSidebarModule,
+		FuseThemeOptionsModule,
 
-        // App modules
-        LayoutModule,
-        SampleModule
-    ],
-    bootstrap   : [
-        AppComponent
-    ]
+		// App modules
+		LayoutModule,
+		SampleModule,
+
+		// Material
+		mat.MatButtonModule,
+		mat.MatIconModule,
+		mat.MatFormFieldModule,
+		mat.MatCheckboxModule,
+		mat.MatInputModule,
+		mat.MatSnackBarModule,
+		mat.MatTableModule,
+		mat.MatMenuModule,
+		mat.MatPaginatorModule,
+		mat.MatProgressSpinnerModule,
+		mat.MatTooltipModule,
+		mat.MatDialogModule,
+		mat.MatToolbarModule,
+		mat.MatButtonToggleModule,
+		mat.MatAutocompleteModule,
+		mat.MatSelectModule,
+		mat.MatSlideToggleModule,
+	],
+	bootstrap: [
+		AppComponent
+	]
 })
-export class AppModule
-{
+export class AppModule {
 }
