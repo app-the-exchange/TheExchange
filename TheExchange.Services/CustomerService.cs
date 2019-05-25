@@ -18,6 +18,7 @@ namespace TheExchange.Services
             customer_app _entity = Mapper.Map<customer_app>(entity);
 
             _uow.CustomerRepository.Add(_entity);
+            _uow.Commit();
 
             return _entity.idcustomer_app;
         }
@@ -27,6 +28,7 @@ namespace TheExchange.Services
             customer_app_countries _entity = Mapper.Map<customer_app_countries>(entity);
 
             _uow.CustomeCountryRepository.Add(_entity);
+            _uow.Commit();
 
             return _entity.idcustomer_app;
         }
