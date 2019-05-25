@@ -19,7 +19,7 @@ namespace TheExchange.Services
         {
             var _list = _uow.CountryRepository.GetAll();
 
-            return Mapper.Map<List<Country>>(_list.ToList());
+            return Mapper.Map<List<Country>>(_list);
         }
     }
 }

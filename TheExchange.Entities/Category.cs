@@ -10,5 +10,10 @@ namespace TheExchange.Entities
     {
         public string name { get; set; }
 
+        public string description { get; set; }
+
+        public string background_image { get; set; }
+
+        public int idcountry { get; set; }
     }
 }
