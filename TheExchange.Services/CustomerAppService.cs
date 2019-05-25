@@ -17,7 +17,7 @@ namespace TheExchange.Services
         {
             customer_app _entity = Mapper.Map<customer_app>(entity);
 
-            _uow.CustomerRepository.Add(_entity);
+            _uow.CustomerAppRepository.Add(_entity);
             _uow.Commit();
 
             return _entity.idcustomer_app;
