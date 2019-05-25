@@ -17,8 +17,8 @@ namespace TheExchange.Data
         public country()
         {
             this.category = new HashSet<category>();
-            this.customer_app_countries = new HashSet<customer_app_countries>();
             this.category_customer = new HashSet<category_customer>();
+            this.customer_app_countries = new HashSet<customer_app_countries>();
             this.customer = new HashSet<customer>();
         }
     
@@ -26,14 +26,15 @@ namespace TheExchange.Data
         public string name { get; set; }
         public Nullable<int> idregion { get; set; }
         public string short_description { get; set; }
-        public string description { get; set; }
         public string flag_image { get; set; }
         public string banner_image { get; set; }
+        public string description1 { get; set; }
+        public string description2 { get; set; }
     
-        public virtual region region { get; set; }
         public virtual ICollection<category> category { get; set; }
-        public virtual ICollection<customer_app_countries> customer_app_countries { get; set; }
         public virtual ICollection<category_customer> category_customer { get; set; }
+        public virtual region region { get; set; }
+        public virtual ICollection<customer_app_countries> customer_app_countries { get; set; }
         public virtual ICollection<customer> customer { get; set; }
     }
 }

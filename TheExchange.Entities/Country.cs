@@ -12,7 +12,9 @@ namespace TheExchange.Entities
 
         public string short_description { get; set; }
 
-        public string description { get; set; }
+        public string description1 { get; set; }
+
+        public string description2 { get; set; }
 
         public string flag_image { get; set; }
 

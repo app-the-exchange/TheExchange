@@ -63,15 +63,15 @@
     <Compile Include="category_customer.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="country.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="customer.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\CategoryCustomerRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
-    <Compile Include="country.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repository\CustomerAppRepository.cs" />
     <Compile Include="customer_app.cs">
       <DependentUpon>Database.tt</DependentUpon>

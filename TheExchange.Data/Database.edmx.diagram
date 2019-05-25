@@ -6,20 +6,20 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a715d358311e436487f20b1c04ca14e7" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="the_exchangeModel.region" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_exchangeModel.country" Width="1.5" PointX="3" PointY="4.875" />
-        <AssociationConnector Association="the_exchangeModel.country_ibfk_1" />
         <EntityTypeShape EntityType="the_exchangeModel.category" Width="1.5" PointX="5.25" PointY="5.125" />
-        <AssociationConnector Association="the_exchangeModel.category_ibfk_1" />
         <EntityTypeShape EntityType="the_exchangeModel.customer_app" Width="1.5" PointX="3" PointY="1.375" />
         <EntityTypeShape EntityType="the_exchangeModel.customer_app_countries" Width="2.25" PointX="5.25" PointY="2.375" />
-        <AssociationConnector Association="the_exchangeModel.customer_app_countries_ibfk_2" />
         <AssociationConnector Association="the_exchangeModel.customer_app_countries_ibfk_1" />
         <EntityTypeShape EntityType="the_exchangeModel.category_customer" Width="1.5" PointX="10.5" PointY="4.375" />
-        <AssociationConnector Association="the_exchangeModel.category_customer_ibfk_1" />
         <EntityTypeShape EntityType="the_exchangeModel.customer" Width="1.5" PointX="8.25" PointY="3.125" />
         <AssociationConnector Association="the_exchangeModel.category_customer_ibfk_2" />
-        <AssociationConnector Association="the_exchangeModel.customer_ibfk_1" />
         <AssociationConnector Association="the_exchangeModel.customer_ibfk_2" />
+        <EntityTypeShape EntityType="the_exchangeModel.country" Width="1.5" PointX="3" PointY="5.875" />
+        <AssociationConnector Association="the_exchangeModel.category_ibfk_1" />
+        <AssociationConnector Association="the_exchangeModel.category_customer_ibfk_1" />
+        <AssociationConnector Association="the_exchangeModel.country_ibfk_1" />
+        <AssociationConnector Association="the_exchangeModel.customer_app_countries_ibfk_2" />
+        <AssociationConnector Association="the_exchangeModel.customer_ibfk_1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

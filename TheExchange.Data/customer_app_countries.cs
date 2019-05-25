@@ -18,7 +18,7 @@ namespace TheExchange.Data
         public int idcustomer_app { get; set; }
         public int idcountry { get; set; }
     
-        public virtual country country { get; set; }
         public virtual customer_app customer_app { get; set; }
+        public virtual country country { get; set; }
     }
 }

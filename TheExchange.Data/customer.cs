@@ -30,7 +30,7 @@ namespace TheExchange.Data
         public string position { get; set; }
     
         public virtual ICollection<category_customer> category_customer { get; set; }
-        public virtual country country { get; set; }
         public virtual customer_app customer_app { get; set; }
+        public virtual country country { get; set; }
     }
 }

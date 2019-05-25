@@ -22,5 +22,12 @@ namespace TheExchange.API.Controllers
 
             return response;
         }
+
+        public Country Get(int id)
+        {
+            var response = _service.Get(id);
+
+            return response;
+        }
     }
 }

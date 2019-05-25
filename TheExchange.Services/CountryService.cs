@@ -17,9 +17,16 @@ namespace TheExchange.Services
 
         public List<Country> GetAll()
         {
-            var _list = _uow.CountryRepository.GetAll();
+            var list = _uow.CountryRepository.GetAll();
 
-            return Mapper.Map<List<Country>>(_list);
+            return Mapper.Map<List<Country>>(list);
+        }
+
+        public Country Get(int id)
+        {
+            var entity = _uow.CountryRepository.GetById(id);
+
+            return Mapper.Map<Country>(entity);
         }
     }
 }

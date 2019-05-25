@@ -26,11 +26,11 @@ namespace TheExchange.Data
         }
     
         public DbSet<region> region { get; set; }
-        public DbSet<country> country { get; set; }
         public DbSet<category> category { get; set; }
         public DbSet<customer_app> customer_app { get; set; }
         public DbSet<customer_app_countries> customer_app_countries { get; set; }
         public DbSet<category_customer> category_customer { get; set; }
         public DbSet<customer> customer { get; set; }
+        public DbSet<country> country { get; set; }
     }
 }
