@@ -72,7 +72,7 @@
     <Compile Include="country.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerRepository.cs" />
+    <Compile Include="Repository\CustomerAppRepository.cs" />
     <Compile Include="customer_app.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
