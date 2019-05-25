@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="category.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="country.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,6 +84,7 @@
     </Compile>
     <Compile Include="Repository\Base\BaseRepository.cs" />
     <Compile Include="Repository\Base\CommonRepository.cs" />
+    <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\RegionRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

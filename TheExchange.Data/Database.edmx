@@ -4,7 +4,29 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="the_exchangeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="the_exchangeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="idcategory" />
+          </Key>
+          <Property Name="idcategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="21844" Nullable="false" />
+          <Property Name="background_image" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idcountry" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="idcountry" />
+          </Key>
+          <Property Name="idcountry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idregion" Type="int" />
+          <Property Name="short_description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="21844" Nullable="false" />
+          <Property Name="flag_image" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="banner_image" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="region">
           <Key>
             <PropertyRef Name="idregion" />
@@ -12,11 +34,44 @@
           <Property Name="idregion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <Association Name="category_ibfk_1">
+          <End Role="country" Type="Self.country" Multiplicity="1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="idcountry" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="idcountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="country_ibfk_1">
+          <End Role="region" Type="Self.region" Multiplicity="0..1" />
+          <End Role="country" Type="Self.country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="region">
+              <PropertyRef Name="idregion" />
+            </Principal>
+            <Dependent Role="country">
+              <PropertyRef Name="idregion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="the_exchangeModelStoreContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="the_exchange" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" Schema="the_exchange" store:Type="Tables" />
           <EntitySet Name="region" EntityType="Self.region" Schema="the_exchange" store:Type="Tables" />
+          <AssociationSet Name="category_ibfk_1" Association="Self.category_ibfk_1">
+            <End Role="country" EntitySet="country" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="country_ibfk_1" Association="Self.country_ibfk_1">
+            <End Role="region" EntitySet="region" />
+            <End Role="country" EntitySet="country" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="the_exchangeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -26,10 +81,70 @@
           </Key>
           <Property Name="idregion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" />
+          <NavigationProperty Name="country" Relationship="the_exchangeModel.country_ibfk_1" FromRole="region" ToRole="country" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="region" EntityType="Self.region" />
+          <EntitySet Name="country" EntityType="the_exchangeModel.country" />
+          <AssociationSet Name="country_ibfk_1" Association="the_exchangeModel.country_ibfk_1">
+            <End Role="region" EntitySet="region" />
+            <End Role="country" EntitySet="country" />
+          </AssociationSet>
+          <EntitySet Name="category" EntityType="the_exchangeModel.category" />
+          <AssociationSet Name="category_ibfk_1" Association="the_exchangeModel.category_ibfk_1">
+            <End Role="country" EntitySet="country" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="idcountry" />
+          </Key>
+          <Property Name="idcountry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="idregion" Type="Int32" />
+          <Property Name="short_description" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="flag_image" Type="String" Nullable="false" />
+          <Property Name="banner_image" Type="String" Nullable="false" />
+          <NavigationProperty Name="region" Relationship="the_exchangeModel.country_ibfk_1" FromRole="country" ToRole="region" />
+          <NavigationProperty Name="category" Relationship="the_exchangeModel.category_ibfk_1" FromRole="country" ToRole="category" />
+        </EntityType>
+        <Association Name="country_ibfk_1">
+          <End Type="the_exchangeModel.region" Role="region" Multiplicity="0..1" />
+          <End Type="the_exchangeModel.country" Role="country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="region">
+              <PropertyRef Name="idregion" />
+            </Principal>
+            <Dependent Role="country">
+              <PropertyRef Name="idregion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="idcategory" />
+          </Key>
+          <Property Name="idcategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="background_image" Type="String" Nullable="false" />
+          <Property Name="idcountry" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="country" Relationship="the_exchangeModel.category_ibfk_1" FromRole="category" ToRole="country" />
+        </EntityType>
+        <Association Name="category_ibfk_1">
+          <End Type="the_exchangeModel.country" Role="country" Multiplicity="1" />
+          <End Type="the_exchangeModel.category" Role="category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="idcountry" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="idcountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,6 +156,30 @@
               <MappingFragment StoreEntitySet="region">
                 <ScalarProperty Name="idregion" ColumnName="idregion" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="country">
+            <EntityTypeMapping TypeName="the_exchangeModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="banner_image" ColumnName="banner_image" />
+                <ScalarProperty Name="flag_image" ColumnName="flag_image" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="short_description" ColumnName="short_description" />
+                <ScalarProperty Name="idregion" ColumnName="idregion" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idcountry" ColumnName="idcountry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="the_exchangeModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="idcountry" ColumnName="idcountry" />
+                <ScalarProperty Name="background_image" ColumnName="background_image" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idcategory" ColumnName="idcategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,8 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a715d358311e436487f20b1c04ca14e7" Name="Diagram1">
+      <Diagram DiagramId="a715d358311e436487f20b1c04ca14e7" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="the_exchangeModel.region" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_exchangeModel.country" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="the_exchangeModel.country_ibfk_1" />
+        <EntityTypeShape EntityType="the_exchangeModel.category" Width="1.5" PointX="5.25" PointY="5.125" />
+        <AssociationConnector Association="the_exchangeModel.category_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

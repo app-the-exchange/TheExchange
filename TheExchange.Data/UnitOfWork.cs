@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheExchange.Data.Repository;
 
 namespace TheExchange.Data
@@ -13,10 +9,16 @@ namespace TheExchange.Data
         private Entities _context;
 
         private RegionRepository _regionRepository;
+        private CountryRepository _countryRepository;
 
         public RegionRepository RegionRepository
         {
             get => _regionRepository ?? (_regionRepository = new RegionRepository(_context));
+        }
+
+        public CountryRepository CountryRepository
+        {
+            get => _countryRepository ?? (_countryRepository = new CountryRepository(_context));
         }
 
         public UnitOfWork()

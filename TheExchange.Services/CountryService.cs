@@ -6,20 +6,20 @@ using TheExchange.Entities;
 
 namespace TheExchange.Services
 {
-    public class RegionService
+    public class CountryService
     {
         private UnitOfWork _uow;
 
-        public RegionService(UnitOfWork uow)
+        public CountryService(UnitOfWork uow)
         {
             _uow = uow;
         }
 
-        public List<Region> GetAll()
+        public List<Country> GetAll()
         {
-            var regionList = _uow.RegionRepository.GetAll();
+            var _list = _uow.CountryRepository.GetAll();
 
-            return Mapper.Map<List<Region>>(regionList.ToList());
+            return Mapper.Map<List<Country>>(_list.ToList());
         }
     }
 }

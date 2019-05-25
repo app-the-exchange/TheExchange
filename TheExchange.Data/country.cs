@@ -12,16 +12,22 @@ namespace TheExchange.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class region
+    public partial class country
     {
-        public region()
+        public country()
         {
-            this.country = new HashSet<country>();
+            this.category = new HashSet<category>();
         }
     
-        public int idregion { get; set; }
+        public int idcountry { get; set; }
         public string name { get; set; }
+        public Nullable<int> idregion { get; set; }
+        public string short_description { get; set; }
+        public string description { get; set; }
+        public string flag_image { get; set; }
+        public string banner_image { get; set; }
     
-        public virtual ICollection<country> country { get; set; }
+        public virtual region region { get; set; }
+        public virtual ICollection<category> category { get; set; }
     }
 }

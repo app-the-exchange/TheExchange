@@ -6,19 +6,19 @@ using TheExchange.Services;
 
 namespace TheExchange.API.Controllers
 {
-    public class RegionController : ApiController
+    public class CountryController : ApiController
     {
-        private RegionService _regionService;
+        private CountryService _service;
 
-        public RegionController()
+        public CountryController()
         {
             var uow = new UnitOfWork();
-            _regionService = new RegionService(uow);
+            _service = new CountryService(uow);
         }
 
-        public List<Region> Get()
+        public List<Country> Get()
         {
-            var response = _regionService.GetAll();
+            var response = _service.GetAll();
 
             return response;
         }

@@ -26,5 +26,7 @@ namespace TheExchange.Data
         }
     
         public DbSet<region> region { get; set; }
+        public DbSet<country> country { get; set; }
+        public DbSet<category> category { get; set; }
     }
 }
