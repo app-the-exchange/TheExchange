@@ -5,14 +5,14 @@ using TheExchange.Services;
 
 namespace TheExchange.API.Controllers
 {
-    public class CustomerController : ApiController
+    public class CustomerAppController : ApiController
     {
-        private readonly CustomerService _service;
+        private readonly CustomerAppService _service;
 
-        public CustomerController()
+        public CustomerAppController()
         {
             var uow = new UnitOfWork();
-            _service = new CustomerService(uow);
+            _service = new CustomerAppService(uow);
         }
 
         [Route("CustomerApp")]

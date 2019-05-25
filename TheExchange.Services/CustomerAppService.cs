@@ -4,11 +4,11 @@ using TheExchange.Entities;
 
 namespace TheExchange.Services
 {
-    public class CustomerService
+    public class CustomerAppService
     {
         private UnitOfWork _uow;
 
-        public CustomerService(UnitOfWork uow)
+        public CustomerAppService(UnitOfWork uow)
         {
             _uow = uow;
         }
