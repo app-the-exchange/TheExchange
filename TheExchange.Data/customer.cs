@@ -12,20 +12,25 @@ namespace TheExchange.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class customer_app
+    public partial class customer
     {
-        public customer_app()
+        public customer()
         {
-            this.customer_app_countries = new HashSet<customer_app_countries>();
-            this.customer = new HashSet<customer>();
+            this.category_customer = new HashSet<category_customer>();
         }
     
-        public int idcustomer_app { get; set; }
+        public int idcustomer { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+        public System.DateTime startdate { get; set; }
+        public string course { get; set; }
+        public string posititon { get; set; }
+        public Nullable<int> idcountry { get; set; }
+        public Nullable<int> idcustomer_app { get; set; }
         public string code { get; set; }
     
-        public virtual ICollection<customer_app_countries> customer_app_countries { get; set; }
-        public virtual ICollection<customer> customer { get; set; }
+        public virtual ICollection<category_customer> category_customer { get; set; }
+        public virtual country country { get; set; }
+        public virtual customer_app customer_app { get; set; }
     }
 }

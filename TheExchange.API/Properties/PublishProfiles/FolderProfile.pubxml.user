@@ -244,31 +244,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/02/2018 13:20:56</publishTime>
     </File>
     <File Include="bin/TheExchange.API.dll">
-      <publishTime>05/25/2019 11:05:35</publishTime>
+      <publishTime>05/25/2019 12:59:13</publishTime>
     </File>
     <File Include="bin/TheExchange.API.pdb">
-      <publishTime>05/25/2019 11:05:35</publishTime>
+      <publishTime>05/25/2019 12:59:13</publishTime>
     </File>
     <File Include="bin/TheExchange.Data.dll">
-      <publishTime>05/25/2019 11:05:32</publishTime>
+      <publishTime>05/25/2019 12:42:33</publishTime>
     </File>
     <File Include="bin/TheExchange.Data.dll.config">
       <publishTime>05/25/2019 02:44:19</publishTime>
     </File>
     <File Include="bin/TheExchange.Data.pdb">
-      <publishTime>05/25/2019 11:05:32</publishTime>
+      <publishTime>05/25/2019 12:42:33</publishTime>
     </File>
     <File Include="bin/TheExchange.Entities.dll">
-      <publishTime>05/25/2019 11:05:32</publishTime>
+      <publishTime>05/25/2019 12:42:34</publishTime>
     </File>
     <File Include="bin/TheExchange.Entities.pdb">
-      <publishTime>05/25/2019 11:05:32</publishTime>
+      <publishTime>05/25/2019 12:42:34</publishTime>
     </File>
     <File Include="bin/TheExchange.Services.dll">
-      <publishTime>05/25/2019 11:05:32</publishTime>
+      <publishTime>05/25/2019 12:42:34</publishTime>
     </File>
     <File Include="bin/TheExchange.Services.pdb">
-      <publishTime>05/25/2019 11:05:32</publishTime>
+      <publishTime>05/25/2019 12:42:34</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 14:57:34</publishTime>
