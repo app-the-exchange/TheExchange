@@ -14,6 +14,7 @@ namespace TheExchange.Data
         private CategoryRepository _categoryRepository;
         private CategoryCustomerRepository _categoryCustomerRepository;
         private CustomerRepository _customerRepository;
+        private CustomeCountryRepository _customeCountryRepository;
 
         public RegionRepository RegionRepository
         {
@@ -38,6 +39,11 @@ namespace TheExchange.Data
         public CustomerRepository CustomerRepository
         {
             get => _customerRepository ?? (_customerRepository = new CustomerRepository(_context));
+        }
+
+        public CustomeCountryRepository CustomeCountryRepository
+        {
+            get => _customeCountryRepository ?? (_customeCountryRepository = new CustomeCountryRepository(_context));
         }
 
         public UnitOfWork()

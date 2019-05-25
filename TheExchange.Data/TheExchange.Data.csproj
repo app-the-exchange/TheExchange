@@ -72,6 +72,7 @@
     <Compile Include="country.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerRepository.cs" />
     <Compile Include="customer_app.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -100,6 +101,7 @@
     <Compile Include="Repository\Base\BaseRepository.cs" />
     <Compile Include="Repository\Base\CommonRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
+    <Compile Include="Repository\CustomeCountryRepository.cs" />
     <Compile Include="Repository\RegionRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
