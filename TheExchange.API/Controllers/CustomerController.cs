@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using TheExchange.API.Helpers;
 using TheExchange.Data;
 using TheExchange.Entities;
 using TheExchange.Services;
-using TheExchange.API.Helpers;
 
 namespace TheExchange.API.Controllers
 {
+    [RoutePrefix("api")]
     public class CustomerController : ApiController
     {
         private readonly CustomerService _service;
@@ -24,6 +21,14 @@ namespace TheExchange.API.Controllers
         public Customer Get(int id)
         {
             var response = _service.GetById(id);
+
+            return response;
+        }
+
+        [Route("Customers")]
+        public List<Customer> GetAll()
+        {
+            var response = _service.GetAll();
 
             return response;
         }
@@ -49,6 +54,53 @@ namespace TheExchange.API.Controllers
             return response;
         }
 
+        [HttpPost]
+        public bool Post([FromBody]Customer entity)
+        {
+            try
+            {
+                _service.Post(entity);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
+
+        [HttpPut]
+        public bool Put([FromBody]Customer entity)
+        {
+            try
+            {
+                _service.Put(entity);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
+
+        [HttpDelete]
+        public bool Delete(int id)
+        {
+            try
+            {
+                _service.Delete(id);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
 
     }
 }

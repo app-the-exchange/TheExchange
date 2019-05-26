@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
-using System.Linq;
 using TheExchange.Data;
 using TheExchange.Entities;
 
@@ -27,6 +26,27 @@ namespace TheExchange.Services
             var entity = _uow.CountryRepository.GetById(id);
 
             return Mapper.Map<Country>(entity);
+        }
+
+        public void Post(Country entity)
+        {
+            country _entity = Mapper.Map<country>(entity);
+
+            _uow.CountryRepository.Add(_entity);
+        }
+
+        public void Put(Country entity)
+        {
+            country _entity = Mapper.Map<country>(entity);
+
+            _uow.CountryRepository.Update(_entity);
+        }
+
+        public void Delete(int id)
+        {
+            var _entity = _uow.CountryRepository.GetById(id);
+
+            _uow.CountryRepository.Delete(_entity);
         }
     }
 }

@@ -9,6 +9,9 @@ bin
 obj
 .vs
 packages
+/Properties/PublishProfiles
+/TheExchange.API\Properties\PublishProfiles
+.pubxml
 
 # dependencies
 /node_modules

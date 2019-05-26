@@ -26,6 +26,8 @@ namespace TheExchange.Entities
 
         public string code { get; set; }
 
+        public string picture { get; set; }
+
         public Country country { get; set; }
     }
 }

@@ -28,9 +28,10 @@ namespace TheExchange.Data
         public Nullable<int> idcustomer_app { get; set; }
         public string code { get; set; }
         public string position { get; set; }
+        public string picture { get; set; }
     
         public virtual ICollection<category_customer> category_customer { get; set; }
-        public virtual customer_app customer_app { get; set; }
         public virtual country country { get; set; }
+        public virtual customer_app customer_app { get; set; }
     }
 }

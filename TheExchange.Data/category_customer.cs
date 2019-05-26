@@ -21,7 +21,7 @@ namespace TheExchange.Data
         public int idcountry { get; set; }
         public int idcustomer { get; set; }
     
-        public virtual customer customer { get; set; }
         public virtual country country { get; set; }
+        public virtual customer customer { get; set; }
     }
 }

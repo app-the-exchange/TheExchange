@@ -1,9 +1,8 @@
 ﻿using System.Web.Http;
-using System.Web.Http.Results;
+using TheExchange.API.Helpers;
 using TheExchange.Data;
 using TheExchange.Entities;
 using TheExchange.Services;
-using TheExchange.API.Helpers;
 
 namespace TheExchange.API.Controllers
 {
