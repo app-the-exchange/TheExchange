@@ -54,6 +54,53 @@ namespace TheExchange.API.Controllers
             return response;
         }
 
+        [HttpPost]
+        public bool Post([FromBody]Customer entity)
+        {
+            try
+            {
+                _service.Post(entity);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
+
+        [HttpPut]
+        public bool Put([FromBody]Customer entity)
+        {
+            try
+            {
+                _service.Put(entity);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
+
+        [HttpDelete]
+        public bool Delete(int id)
+        {
+            try
+            {
+                _service.Delete(id);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
 
     }
 }

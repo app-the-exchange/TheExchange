@@ -45,5 +45,26 @@ namespace TheExchange.Services
 
             return Mapper.Map<List<Customer>>(list);
         }
+
+        public void Post(Customer entity)
+        {
+            customer _entity = Mapper.Map<customer>(entity);
+
+            _uow.CustomerRepository.Add(_entity);
+        }
+
+        public void Put(Customer entity)
+        {
+            customer _entity = Mapper.Map<customer>(entity);
+
+            _uow.CustomerRepository.Update(_entity);
+        }
+
+        public void Delete(int id)
+        {
+            var _entity = _uow.CustomerRepository.GetById(id);
+
+            _uow.CustomerRepository.Delete(_entity);
+        }
     }
 }
