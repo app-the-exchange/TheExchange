@@ -6,7 +6,8 @@ export const environment = {
     production: false,
 	hmr       : false,
 	// api: 'http://localhost:22453/api/'
-	api: 'https://dvp4.dartdigital.com.br/api/'
+	// api: 'https://dvp4.dartdigital.com.br/api/'
+	api: 'https://ec2-3-19-74-106.us-east-2.compute.amazonaws.com/api/'
 };
 
 /*

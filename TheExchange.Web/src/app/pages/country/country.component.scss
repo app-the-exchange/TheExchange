@@ -1,15 +1,9 @@
-mat-row.hovered {
-    background-color: #38bcfc !important;
-    cursor: pointer;
-}
-
-mat-row.selected {
-    background-color: #039be5 !important;
-    cursor: pointer;
-}
-
-.column-actions {
-    padding-right: 25px !important;
+.first-fab-button {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    padding: 0;
+    z-index: 99;
 }
 
 .loading-data {
@@ -22,29 +16,4 @@ mat-row.selected {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.first-fab-button {
-    position: absolute;
-    bottom: 12px;
-    right: 16px;
-    padding: 0;
-    z-index: 99;
-}
-
-.mat-button-toggle-group {
-    border-radius: 0px;
-}
-
-.mat-button-toggle-checked {
-    background: white !important;
-    font-weight: bold;
-}
-
-mat-table {
-    overflow: auto;
-}
-
-.hovered {
-    background: #38bcfc !important;
 }

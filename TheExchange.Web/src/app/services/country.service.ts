@@ -16,5 +16,17 @@ export class CountryService {
 
     getAll(): Observable<CountryModel[]> {
         return this.http.get<CountryModel[]>(environment.api + 'country');
-    }
+	}
+	
+	get(idcountry: number): Observable<CountryModel> {
+		return this.http.get<CountryModel>(`${environment.api}country/${idcountry}`);
+	}
+
+	post(country: CountryModel): Observable<boolean> {
+		return this.http.post<boolean>(environment.api + 'country', country);
+	}
+
+	put(country: CountryModel): Observable<boolean> {
+		return this.http.put<boolean>(environment.api + 'country', country);
+	}
 }

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Categoria: {{category.name}}</h1>
+<div mat-dialog-content>
+    <p>Link da imagem de fundo</p>
+    <mat-form-field class="w-100-p">
+        <input matInput [(ngModel)]="category.background_image">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="category" cdkFocusInitial>Salvar</button>
+</div>

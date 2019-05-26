@@ -1,118 +1,116 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
 
- <div class="page-layout carded fullwidth inner-scroll">
+    <div class="loading-data" *ngIf="isLoadingData">
+        <mat-spinner [diameter]="50" *ngIf="isLoadingData"></mat-spinner>
+    </div>
 
-		<div class="loading-data" *ngIf="isLoadingData">
-			<mat-spinner [diameter]="50" *ngIf="isLoadingData"></mat-spinner>
-		</div>
-	
-		<!-- TOP BACKGROUND -->
-		<div class="top-bg accent"></div>
-		<!-- / TOP BACKGROUND -->
-	
-		<!-- CENTER -->
-		<div class="center">
-	
-			<!-- HEADER -->
-			<div class="header accent" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.lt-md="space-between start"
-				fxLayoutAlign.gt-sm="space-between center">
-	
-				<!-- APP TITLE -->
-				<div class="logo my-12 m-sm-0" fxFlex.gt-sm="20" fxFlex.lt-md="100" fxLayout.gt-sm="row" fxLayoutAlign="start center">
-					<mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-						public
-					</mat-icon>
-					<span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-						Países
-					</span>
-				</div>
-				<!-- / APP TITLE -->
-	
-				<!-- SEARCH -->
-				<div class="search-input-wrapper w-100-p m-md-0" fxFlex.gt-sm="50" fxFlex.lt-md="100" fxLayout="row"
-					fxLayoutAlign="start center">
-					<label for="search" class="mr-8">
-						<mat-icon class="secondary-text">search</mat-icon>
-					</label>
-					<mat-form-field floatLabel="never" fxFlex="1 0 auto">
-						<input id="search" (keyup)="filterData($event.target.value)" [(ngModel)]="filterModel" matInput
-							#filter placeholder="Digite para Buscar">
-						<button class="close-search" *ngIf="filterModel" matSuffix mat-icon-button (click)="filterModel=''; filterData('')">
-							<mat-icon>close</mat-icon>
-						</button>
-					</mat-form-field>
-				</div>
-				<!-- / SEARCH -->
-	
-				<div fxFlex="15" fxShow.gt-sm fxHide.lt-md fxLayout="row" fxLayoutAlign="center center">
-					<button mat-mini-fab color="dark" matTooltip="Atualizar" (click)="getData()">
-						<mat-icon>refresh</mat-icon>
-					</button>
-				</div>
-	
-			</div>
-			<!-- / HEADER -->
-			 
-			<!-- CONTENT CARD -->
-			<div class="content-card pb-48" ngClass.xs="mt-24">
-	
-				<mat-table class="table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}">
-	
-					<ng-container matColumnDef="flag_image">
-						<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-						<mat-cell *matCellDef="let row">
-							<p class="text-truncate">{{row.flag_image}}</p>
-						</mat-cell>
-					</ng-container>
-	
-					<ng-container matColumnDef="name">
-						<mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxShow>Nome</mat-header-cell>
-						<mat-cell *matCellDef="let row" fxHide.xs fxShow>
-							<p class="text-truncate">{{row.name}}</p>
-						</mat-cell>
-					</ng-container>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
-					<ng-container matColumnDef="actions">
-						<mat-header-cell *matHeaderCellDef fxLayoutAlign="end center" class="column-actions">Ações</mat-header-cell>
-						<mat-cell *matCellDef="let row" fxLayoutAlign="end center">
-							<button mat-icon-button [matMenuTriggerFor]="moreMenu">
-								<mat-icon class="secondary-text">more_vert</mat-icon>
-							</button>
-	
-							<mat-menu #moreMenu="matMenu">
-								<button mat-menu-item (click)="edit(row.id)">
-									<mat-icon>create</mat-icon>
-									Editar
-								</button>
-								<button mat-menu-item (click)="delete(row.id)">
-									<mat-icon>delete</mat-icon>
-									Excluir
-								</button>
-								<!-- <button mat-menu-item (click)="restore(row.id)" *ngIf="filterType === 'inactive'">
-								  <mat-icon>check</mat-icon>
-								  Restaurar
-							  </button> -->
-							</mat-menu>
-	
-						</mat-cell>
-					</ng-container>
-	
-					<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-					<mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ hovered: row.hovered, 'selected': selection.isSelected(row)}"
-						(mouseover)="row.hovered = !selection.isSelected(row)" (mouseout)="row.hovered = false" (click)="select(row)"></mat-row>
-				</mat-table>
-	
-				<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-	
-			</div>
-			<!-- / CONTENT CARD -->
-		</div>
-		<!-- / CENTER -->
-	
-		<div>
-			<button mat-fab class="first-fab-button" color="accent" *fuseIfOnDom [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
-				(click)="new()">
-				<mat-icon>add</mat-icon>
-			</button>
-		</div>
-	
-	</div>
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/country'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        País
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span *ngIf="pageType === 'new'">Novo</span>
+                        <span *ngIf="pageType === 'edit'">Editar</span>
+                        <span *ngIf="pageType === 'view'">Visualizar</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <a mat-stroked-button class="reference-button mt-16 mt-sm-0" (click)="openCategory()">
+                <mat-icon class="mr-8">explore</mat-icon>
+                <span>
+					Curiosidades
+				</span>
+            </a>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content" *ngIf="!isLoadingData">
+
+                <form name="form" [formGroup]="form" class="product w-100-p" fxLayout="column" fxFlex>
+
+                    <!-- <mat-tab-group> -->
+
+                    <!-- <mat-tab label="Basic Info"> -->
+
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+
+                        <mat-form-field class="w-100-p">
+                            <input matInput name="name" formControlName="name" placeholder="Nome">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <textarea matInput name="short_description" formControlName="short_description"
+                                placeholder="Descrição Curta">
+							</textarea>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <textarea matInput name="description1" formControlName="description1"
+                                placeholder="Descrição 1">
+							</textarea>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <textarea matInput name="description2" formControlName="description2"
+                                placeholder="Descrição 2">
+								</textarea>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <input matInput name="flag_image" formControlName="flag_image" placeholder="Link da imagem">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <input matInput name="banner_image" formControlName="banner_image"
+                                placeholder="Link do banner">
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- </mat-tab> -->
+
+                    <!-- </mat-tab-group> -->
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+    <div *ngIf="pageType !== 'view'">
+        <button mat-fab class="first-fab-button" color="accent" *fuseIfOnDom
+            [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" [disabled]="!form || form.invalid"
+            (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+
+</div>

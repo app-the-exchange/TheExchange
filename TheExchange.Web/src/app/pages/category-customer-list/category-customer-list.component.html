@@ -1,0 +1,123 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <div class="loading-data" *ngIf="isLoadingData">
+        <mat-spinner [diameter]="50" *ngIf="isLoadingData"></mat-spinner>
+    </div>
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/customer/' + pageType + '/' + id">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        Cliente - Informações
+                    </div>
+                    <!-- <div class="subtitle secondary-text">
+							<span *ngIf="pageType === 'new'">Novo</span>
+							<span *ngIf="pageType === 'edit'">Editar</span>
+							<span *ngIf="pageType === 'view'">Visualizar</span>
+						</div> -->
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- <a mat-stroked-button class="reference-button mt-16 mt-sm-0" href="https://material.angular.io/"
+					target="_blank">
+					<mat-icon class="mr-8">explore</mat-icon>
+					<span>
+						Curiosidades
+					</span>
+				</a> -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content" *ngIf="!isLoadingData">
+
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let category of category" cdkDrag
+                        [ngStyle]="{'background-image': 'linear-gradient(rgba(20,20,20, 0.7), rgba(20,20,20, 0.7)), url(' + category.background_image + ')'}">
+
+                        <mat-form-field class="" ngClass.gt-xs="w-80-p" ngClass.xs="w-50-p">
+                            <input matInput [value]="category.name" [disabled]="category.disabled"
+                                style="font-weight: bold; color: white">
+                        </mat-form-field>
+
+                        <div *ngIf="category.disabled">
+                            <!-- <button mat-icon-button>
+                                <mat-icon>
+                                    create
+                                </mat-icon>
+                            </button> -->
+
+                            <button mat-icon-button [matMenuTriggerFor]="moreMenu">
+                                <mat-icon>create</mat-icon>
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button mat-menu-item (click)="changeName(category)">
+                                    Alterar Nome
+                                </button>
+                                <button mat-menu-item (click)="changeBackgroundImage(category)">
+                                    Alterar Imagem de Fundo
+								</button>
+								<button mat-menu-item (click)="deleteCategory(category)">
+                                    Excluir Categoria
+                                </button>
+                            </mat-menu>
+                        </div>
+
+                        <div *ngIf="!category.disabled">
+
+                            <button mat-icon-button (click)="category.disabled = true">
+                                <mat-icon>
+                                    save
+                                </mat-icon>
+							</button>
+							
+							<button mat-icon-button (click)="category.name = category.old_name; category.disabled = true">
+                                <mat-icon>
+                                    clear
+                                </mat-icon>
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+    <div>
+        <button mat-fab class="first-fab-button" color="accent" *fuseIfOnDom
+            [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
+            (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+
+</div>

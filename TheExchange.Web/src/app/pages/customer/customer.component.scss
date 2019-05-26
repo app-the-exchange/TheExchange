@@ -1,0 +1,19 @@
+.first-fab-button {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    padding: 0;
+    z-index: 99;
+}
+
+.loading-data {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

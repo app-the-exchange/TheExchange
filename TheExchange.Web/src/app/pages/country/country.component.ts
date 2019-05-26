@@ -1,129 +1,119 @@
-import { UtilHelper } from './../../helpers/util.helper';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { CountryService } from 'app/services/country.service';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
-import { CountryModel } from 'app/models/country.model';
-import { finalize } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import * as _ from 'lodash';
-import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
+import { CountryService } from './../../services/country.service';
+import { CountryModel } from './../../models/country.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
+import { catchError, finalize } from 'rxjs/operators';
+import { empty } from 'rxjs';
 
 @Component({
-  selector: 'app-country',
-  templateUrl: './country.component.html',
-  styleUrls: ['./country.component.scss'],
-  animations: fuseAnimations
+	selector: 'app-country',
+	templateUrl: './country.component.html',
+	styleUrls: ['./country.component.scss'],
+	animations: fuseAnimations
 })
 export class CountryComponent implements OnInit {
 	isLoadingData = false;
-	displayedColumns = ['flag_image', 'name', 'actions'];
-	dataSource: MatTableDataSource<CountryModel>;
-	selection: SelectionModel<CountryModel>;
-	filterModel: string;
-	filterType: string;
-
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild('filter') filter: ElementRef;
-	@ViewChild(MatSort) sort: MatSort;
+	form: FormGroup;
+	pageType: string;
+	country: CountryModel = new CountryModel();
+	id: number;
 
 	constructor(
-		private countryService: CountryService,
-		private utilHelper: UtilHelper,
+		private formBuilder: FormBuilder,
+		private activatedRoute: ActivatedRoute,
 		private router: Router,
-		private matDialog: MatDialog
+		private countryService: CountryService
+		// private notificationService: NotificationService,
+		// private brMasker: BrMaskerIonicServices3,
+		// private concurrentService: ConcurrentService
 	) { }
 
 	ngOnInit(): void {
-		this.dataSource = new MatTableDataSource<CountryModel>([]);
-		this.dataSource.sortingDataAccessor = (item, property) => {
-			switch (property) {
-				// case 'tipo': return item.tipoAcesso.nome;
-				// case 'tela': return item.tela.nome;
-				default: return item[property];
-			}
-		};
+		this.pageType = this.activatedRoute.snapshot.params.type;
 
-		this.dataSource.filterPredicate = (data: CountryModel, filterValue: string) => {
-			const properties = [
-				data.name
-				// data.tipoAcesso.nome
-			];
-			return this.filterPredicate(filterValue, properties);
-		};
+		this.loadForm();
 
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
-		this.selection = new SelectionModel<CountryModel>(false, [], true);
+		if (this.pageType !== 'new') {
+			// this.id = this.pageType;
+			this.isLoadingData = true;
 
-		this.getData();
+			this.id = this.activatedRoute.snapshot.params.id;
+
+			this.countryService.get(this.id)
+				.pipe(
+					finalize(() => this.isLoadingData = false),
+					catchError((error) => {
+						this.router.navigate(['/country']);
+						return empty();
+					}))
+				.subscribe((country) => {
+					this.country = country;
+					this.loadForm();
+				});
+		}
 	}
 
-	filterPredicate(filterValue: string, properties: any[]): any {
-		const matchFilter = [];
-		let filterArray = filterValue.split('&');
-
-		properties = _.reject(properties, _.isNil || _.isEmpty || _.isUndefined);
-		filterArray = _.reject(filterArray, _.isNil || _.isEmpty || _.isUndefined);
-
-		filterArray.forEach(filter => {
-			const customFilter = [];
-
-			filter = this.utilHelper.stripAccents(filter).toLowerCase();
-
-			properties.forEach(property => {
-				property = this.utilHelper.stripAccents(property).toLowerCase();
-				customFilter.push(_.includes(property.toString(), filter));
-			});
-			matchFilter.push(customFilter.some(Boolean));
+	loadForm(): void {
+		this.form = this.formBuilder.group({
+			name: [{ value: this.country.name, disabled: this.isViewPage() }, [Validators.required]],
+			description1: [{ value: this.country.description1, disabled: this.isViewPage() }, []],
+			description2: [{ value: this.country.description2, disabled: this.isViewPage() }],
+			short_description: [{ value: this.country.short_description, disabled: this.isViewPage() }, [Validators.required]],
+			banner_image: [{ value: this.country.banner_image, disabled: this.isViewPage() }, [Validators.required]],
+			flag_image: [{ value: this.country.flag_image, disabled: this.isViewPage() }, [Validators.required]]
 		});
-
-		return matchFilter.every(Boolean);
 	}
 
-	filterData(filter: string): void {
-		this.dataSource.filter = filter;
+	isViewPage(): boolean {
+		return this.pageType === 'view';
 	}
 
-	getData(): void {
-		this.isLoadingData = true;
+	save(): void {
+		const form = this.form.getRawValue();
 
-		this.countryService.getAll()
-			.pipe(finalize(() => this.isLoadingData = false))
-			.subscribe((response: CountryModel[]) => {
+		const country: CountryModel = <CountryModel>{
+			idcountry: this.id ? this.id : null,
+			description1: form.description1,
+			description2: form.description2,
+			short_description: form.short_description,
+			banner_image: form.banner_image,
+			flag_image: form.flag_image,
+			name: form.name
+		};
 
-					this.dataSource.data = response;
+		if (this.pageType === 'new') {
+			this.countryService.post(country)
+				.subscribe((response) => {
 
-			});
+					if (response) {
+						// this.notificationService.success('Concorrente cadastrado com sucesso');
+						this.router.navigate(['/country']);
+					}
+					else {
+						// TODO - ERRO
+					}
+
+				});
+		}
+		else {
+			this.countryService.put(country)
+				.subscribe((response) => {
+
+					if (response) {
+						// this.notificationService.success('Concorrente atualizado com sucesso');
+						this.router.navigate(['/country']);
+					}
+					else {
+						// TODO - ERRO
+					}
+
+				});
+		}
 	}
 
-	edit(id: string): void {
-		this.router.navigate(['/access-control/access-item', id]);
+	openCategory() {
+		this.router.navigate(['/country/' + this.pageType + '/' + this.id + '/category']);
 	}
-
-	new(): void {
-		this.router.navigate(['access-control/access-item/novo']);
-	}
-
-	delete(id: string): void {
-		const dialogRef = this.matDialog.open(FuseConfirmDialogComponent);
-
-		dialogRef.componentInstance.confirmMessage = 'Confirma a exclusão do Item de Acesso?';
-
-		dialogRef.afterClosed()
-			.subscribe((confirm: Boolean) => {
-
-				if (!confirm) {
-					return;
-				}
-
-				// this.accessControlService.deleteAccessItem(id)
-				// 	.subscribe(() => {
-				// 		this.getData();
-				// 		this.notificationService.success('Item de Acesso excluído com sucesso');
-				// 	});
-			});
-	}
-
 }

@@ -1,0 +1,110 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <div class="loading-data" *ngIf="isLoadingData">
+        <mat-spinner [diameter]="50" *ngIf="isLoadingData"></mat-spinner>
+    </div>
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/customer'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        Usuário - Aplicativo
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span *ngIf="pageType === 'new'">Novo</span>
+                        <span *ngIf="pageType === 'edit'">Editar</span>
+                        <span *ngIf="pageType === 'view'">Visualizar</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <a mat-stroked-button class="reference-button mt-16 mt-sm-0" [href]="'mailto:' + user.email">
+                <mat-icon class="mr-8">mail</mat-icon>
+                <span>
+                    Enviar E-mail
+                </span>
+            </a>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content" *ngIf="!isLoadingData">
+
+                <form name="form" [formGroup]="form" class="product w-100-p" fxLayout="column" fxFlex>
+
+                    <!-- <mat-tab-group> -->
+
+                    <!-- <mat-tab label="Basic Info"> -->
+
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+
+                        <mat-form-field class="w-100-p">
+                            <input matInput name="name" formControlName="name" placeholder="Nome">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <input matInput name="email" formControlName="email" placeholder="E-mail">
+                        </mat-form-field>
+
+                        <mat-list>
+                            <h3 mat-subheader>Países navegados no Aplicativo</h3>
+                            <mat-list-item *ngFor="let country of user.countryvisited">
+                                <mat-icon mat-list-icon>public</mat-icon>
+                                <h4 mat-line>{{country.name}}</h4>
+                            </mat-list-item>
+                        </mat-list>
+
+                        <!-- <mat-form-field class="w-100-p">
+                            <input matInput name="course" formControlName="course"
+                                placeholder="Curso">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100-p">
+                            <input matInput name="code" formControlName="code" placeholder="Código do Cliente">
+                        </mat-form-field> -->
+
+                    </div>
+
+                    <!-- </mat-tab> -->
+
+                    <!-- </mat-tab-group> -->
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+    <div *ngIf="pageType !== 'view'">
+        <button mat-fab class="first-fab-button" color="accent" *fuseIfOnDom
+            [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" [disabled]="!form || form.invalid"
+            (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+
+</div>
