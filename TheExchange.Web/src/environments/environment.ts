@@ -4,7 +4,9 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+	hmr       : false,
+	// api: 'http://localhost:22453/api/'
+	api: 'https://dvp4.dartdigital.com.br/api/'
 };
 
 /*

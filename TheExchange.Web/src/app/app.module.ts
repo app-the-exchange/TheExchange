@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -20,6 +20,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 import { CountryComponent } from './pages/country/country.component';
 
 import * as mat from '@angular/material';
+import { UrlInterceptor } from './interceptors/url.interceptor';
 
 const appRoutes: Routes = [
 	{
@@ -81,6 +82,10 @@ const appRoutes: Routes = [
 		mat.MatAutocompleteModule,
 		mat.MatSelectModule,
 		mat.MatSlideToggleModule,
+	],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true },
+		// { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
 	],
 	bootstrap: [
 		AppComponent
