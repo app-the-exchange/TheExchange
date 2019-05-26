@@ -7,7 +7,7 @@ using TheExchange.Services;
 
 namespace TheExchange.API.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CountryController : ApiController
     {
         private readonly CountryService _service;
@@ -73,7 +73,6 @@ namespace TheExchange.API.Controllers
                 return false;
             }
         }
-        //delete
 
     }
 }
