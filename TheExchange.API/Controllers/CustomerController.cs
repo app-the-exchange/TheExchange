@@ -7,6 +7,7 @@ using TheExchange.Services;
 
 namespace TheExchange.API.Controllers
 {
+    [RoutePrefix("api")]
     public class CustomerController : ApiController
     {
         private readonly CustomerService _service;
@@ -24,7 +25,8 @@ namespace TheExchange.API.Controllers
             return response;
         }
 
-        public List<Customer> Get()
+        [Route("Customers")]
+        public List<Customer> GetAll()
         {
             var response = _service.GetAll();
 
