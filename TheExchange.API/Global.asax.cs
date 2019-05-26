@@ -22,5 +22,15 @@ namespace TheExchange.API
 
             AutoMapperConfig.RegisterMappings();
         }
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.HttpMethod == "OPTIONS")
+            {
+                Response.AddHeader("Access-Control-Allow-Headers", "Content-Type, Accept, Pragma, Cache-Control, Authorization ");
+                Response.AddHeader("Access-Control-Allow-Origin", "*");
+                Response.End();
+            }
+        }
     }
 }

@@ -57,35 +57,20 @@
 	
 				<mat-table class="table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}">
 	
-					<ng-container matColumnDef="nome">
-						<mat-header-cell *matHeaderCellDef mat-sort-header>Item de Acesso</mat-header-cell>
+					<ng-container matColumnDef="flag_image">
+						<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
 						<mat-cell *matCellDef="let row">
-							<p class="text-truncate">{{row.nome}}</p>
+							<p class="text-truncate">{{row.flag_image}}</p>
 						</mat-cell>
 					</ng-container>
 	
-					<ng-container matColumnDef="tela">
-						<mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxShow>Tela</mat-header-cell>
+					<ng-container matColumnDef="name">
+						<mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxShow>Nome</mat-header-cell>
 						<mat-cell *matCellDef="let row" fxHide.xs fxShow>
-							<p class="text-truncate">{{row.tela.nome}}</p>
+							<p class="text-truncate">{{row.name}}</p>
 						</mat-cell>
 					</ng-container>
-	
-					<!-- <ng-container matColumnDef="tipo">
-						<mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxShow>Tipo</mat-header-cell>
-						<mat-cell *matCellDef="let row" fxHide.xs fxShow>
-							<p class="text-truncate">{{row.tipoAcesso.nome}}</p>
-						</mat-cell>
-					</ng-container> -->
-	
-					<ng-container matColumnDef="implementado">
-						<mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxShow>Implementado?</mat-header-cell>
-						<mat-cell *matCellDef="let row" fxHide.xs fxShow>
-							<p class="text-truncate" *ngIf="row.implementado">Sim</p>
-							<p class="text-truncate" *ngIf="!row.implementado">Não</p>
-						</mat-cell>
-					</ng-container>
-	
+
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef fxLayoutAlign="end center" class="column-actions">Ações</mat-header-cell>
 						<mat-cell *matCellDef="let row" fxLayoutAlign="end center">
@@ -94,11 +79,11 @@
 							</button>
 	
 							<mat-menu #moreMenu="matMenu">
-								<button mat-menu-item (click)="edit(row.id)" *ngIf="checkPermissionEdit()">
+								<button mat-menu-item (click)="edit(row.id)">
 									<mat-icon>create</mat-icon>
 									Editar
 								</button>
-								<button mat-menu-item (click)="delete(row.id)" *ngIf="checkPermissionDelete()">
+								<button mat-menu-item (click)="delete(row.id)">
 									<mat-icon>delete</mat-icon>
 									Excluir
 								</button>
