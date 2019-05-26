@@ -47,7 +47,7 @@ namespace TheExchange.API.Controllers
         }
 
         [HttpPut]
-        public bool Put(int id)
+        public bool Put([FromBody]Country entity)
         {
             try
             {
@@ -61,11 +61,11 @@ namespace TheExchange.API.Controllers
         }
 
         [HttpDelete]
-        public bool Delete([FromBody]Country entity)
+        public bool Delete(int id)
         {
             try
             {
-                _service.Put(entity);
+                _service.Delete(id);
                 return true;
             }
             catch
