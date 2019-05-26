@@ -32,6 +32,48 @@ namespace TheExchange.API.Controllers
             return response;
         }
 
-        //post Country bool
+        [HttpPost]
+        public bool Post([FromBody]Country entity)
+        {
+            try
+            {
+                _service.Post(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        [HttpPut]
+        public bool Put(int id)
+        {
+            try
+            {
+                _service.Put(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        [HttpDelete]
+        public bool Delete([FromBody]Country entity)
+        {
+            try
+            {
+                _service.Put(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        //delete
+
     }
 }
