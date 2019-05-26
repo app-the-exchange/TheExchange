@@ -38,5 +38,12 @@ namespace TheExchange.Services
 
             return Mapper.Map<Customer>(response);
         }
+
+        public List<Customer> GetAll()
+        {
+            var list = _uow.CustomerRepository.GetAll();
+
+            return Mapper.Map<List<Customer>>(list);
+        }
     }
 }

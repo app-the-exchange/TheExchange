@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using TheExchange.API.Helpers;
 using TheExchange.Data;
 using TheExchange.Entities;
 using TheExchange.Services;
-using TheExchange.API.Helpers;
 
 namespace TheExchange.API.Controllers
 {
@@ -24,6 +20,13 @@ namespace TheExchange.API.Controllers
         public Customer Get(int id)
         {
             var response = _service.GetById(id);
+
+            return response;
+        }
+
+        public List<Customer> Get()
+        {
+            var response = _service.GetAll();
 
             return response;
         }

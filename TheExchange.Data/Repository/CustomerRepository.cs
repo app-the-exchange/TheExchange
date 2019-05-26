@@ -27,5 +27,10 @@ namespace TheExchange.Data.Repository.Base
         {
             return Entities.customer.Include(c => c.country).FirstOrDefault(c => c.idcustomer == id);
         }
+
+        public override IEnumerable<customer> GetAll()
+        {
+            return Entities.customer.Include(c => c.country).ToList();
+        }
     }
 }
